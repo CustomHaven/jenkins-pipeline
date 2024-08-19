@@ -1,5 +1,10 @@
 pipeline {
 	agent any
+	// agent {
+    //     docker {
+    //         image 'maven:3.6.3'
+    //     }
+    // }
 	environment {
 		dockerHome = tool "myDocker"
 		mavenHome = tool "myMaven"
@@ -33,6 +38,30 @@ pipeline {
 				sh "mvn test"
 			}
 		}
+		stage('Package') {
+			steps {
+				sh 'mvn package -DskipTest'
+			}
+		}
+		stage('Build Docker Image') {
+			steps {
+				script {
+					dockerImage = docker.build("docker build -t customhaven/current-exchange-devops:$env.BUILD_TAG")
+				}
+				
+			}
+		}
+		stage('Push Docker Image') {
+			steps {
+				script {
+					docker.withRegistry('', 'dockerhub') {
+						dockerImage.push()
+						dockerImage.push("latest")
+					}
+				}
+			}
+		}
+		
 		stage('Integration Test') {
 			steps {
 				echo "Integration Test"
