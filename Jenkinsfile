@@ -1,8 +1,8 @@
 pipeline {
-	// agent any
 	agent {
         docker {
             image 'maven:3.9.8'
+			image 'docker:20.10.7-dind' // Example image with Docker
         }
     }
 	environment {
