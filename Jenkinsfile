@@ -48,7 +48,7 @@ pipeline {
 		stage('Build Docker Image') {
 			steps {
 				script {
-					dockerImage = docker.build("customhaven/currency-exchange-java:$env.BUILD_TAG .")
+					dockerImage = docker.build("customhaven/currency-exchange-java:${env.BUILD_TAG}")
 				}
 				
 			}
