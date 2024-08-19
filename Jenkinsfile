@@ -1,10 +1,10 @@
 pipeline {
-	agent {
-        docker {
-            image 'maven:3.9.8'
-			image 'docker:20.10.7-dind' // Example image with Docker
-        }
-    }
+	agent any
+	// agent {
+    //     docker {
+    //         image 'maven:3.9.8'
+    //     }
+    // }
 	environment {
 		dockerHome = tool "myDocker"
 		mavenHome = tool "myMaven"
@@ -17,7 +17,7 @@ pipeline {
 				sh 'mvn --version'
 				echo 'docker-here'
 				sh 'docker --version'
-				// echo 'node-testing'
+				echo 'node-testing'
 				sh 'node --version'
 				echo "Build"
 				echo "Path: $Path"
