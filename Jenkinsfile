@@ -1,11 +1,10 @@
 pipeline {
 	// agent any
-	// agent {
-    //     docker {
-    //         image 'maven:3.9.8'
-	// 		image ''
-    //     }
-    // }
+	agent {
+        docker {
+            image 'maven:3.9.8'
+        }
+    }
 	environment {
 		dockerHome = tool "myDocker"
 		mavenHome = tool "myMaven"
@@ -14,11 +13,12 @@ pipeline {
 	stages {
 		stage('Checkout') {
 			steps {
+				echo 'we have java'
 				sh 'mvn --version'
 				echo 'docker-here'
 				sh 'docker --version'
 				// echo 'node-testing'
-				// sh 'node --version'
+				sh 'node --version'
 				echo "Build"
 				echo "Path: $Path"
 				echo "Build Number: $env.BUILD_NUMBER"
