@@ -14,6 +14,7 @@ pipeline {
 		stage('Checkout') {
 			steps {
 				sh 'mvn --version'
+				echo "docker-here"
 				sh 'docker --version'
 				echo "Build"
 				echo "Path: $Path"
