@@ -20,6 +20,7 @@ pipeline {
 				echo "Build Number: $env.BUILD_NUMBER"
 				echo "Build ID: $env.BUILD_ID"
 				echo "Build URL: $env.BUILD_URL"
+				echo "Build Tag: $env.BUILD_TAG"
 				echo "Job Name: $env.JOB_NAME"
 			}
 			post {
@@ -46,7 +47,7 @@ pipeline {
 		stage('Build Docker Image') {
 			steps {
 				script {
-					dockerImage = docker.build("docker build -t customhaven/current-exchange-devops:$env.BUILD_TAG")
+					dockerImage = docker.build("customhaven/currency-exchange-java:$env.BUILD_TAG")
 				}
 				
 			}
