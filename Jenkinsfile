@@ -16,6 +16,8 @@ pipeline {
 				sh 'mvn --version'
 				echo 'docker-here'
 				sh 'docker --version'
+				echo 'node-testing'
+				sh 'node --version'
 				echo "Build"
 				echo "Path: $Path"
 				echo "Build Number: $env.BUILD_NUMBER"
